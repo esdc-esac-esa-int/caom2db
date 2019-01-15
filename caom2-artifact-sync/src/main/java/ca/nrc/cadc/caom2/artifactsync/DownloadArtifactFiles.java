@@ -71,6 +71,7 @@ package ca.nrc.cadc.caom2.artifactsync;
 
 import ca.nrc.cadc.caom2.Artifact;
 import ca.nrc.cadc.caom2.artifact.ArtifactStore;
+import ca.nrc.cadc.caom2.artifact.resolvers.AdResolver;
 import ca.nrc.cadc.caom2.artifact.resolvers.GeminiResolver;
 import ca.nrc.cadc.caom2.artifact.resolvers.MastResolver;
 import ca.nrc.cadc.caom2.harvester.HarvestResource;
@@ -268,6 +269,8 @@ public class DownloadArtifactFiles implements PrivilegedExceptionAction<Integer>
                     resolver = new MastResolver();
                 } else if ("gemini".equals(artifactURI.getScheme())) {
                     resolver = new GeminiResolver();
+                } else if ("ad".equals(artifactURI.getScheme())) {
+                	resolver = new AdResolver();
                 } else {
                     throw new IllegalArgumentException("unsupported scheme in artifactURI: " + artifactURI.toString());
                 }
